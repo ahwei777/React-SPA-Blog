@@ -1,17 +1,23 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Alert } from 'react-bootstrap';
+import { Alert, Spinner } from 'react-bootstrap';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { DualRing as GettingUserDataLoader } from 'react-awesome-spinners';
 import {
   MEDIA_QUERY_MOBILE_M,
   MEDIA_QUERY_MOBILE_L,
   MEDIA_QUERY_TABLET,
 } from '../../constants/breakpoint';
-import { setErrorMessage, selectErrorMessage } from '../../redux/reducers/errorMessageReducer';
-import { setUserData, selectUserData, selectIsGettingUserData } from '../../redux/reducers/userReducer';
+import {
+  setErrorMessage,
+  selectErrorMessage,
+} from '../../redux/reducers/errorMessageReducer';
+import {
+  setUserData,
+  selectUserData,
+  selectIsGettingUserData,
+} from '../../redux/reducers/userReducer';
 import { setAuthToken } from '../../utils';
 
 const HeaderContainer = styled.div`
@@ -91,8 +97,9 @@ const Nav = styled(Link)`
   cursor: pointer;
   color: black;
   text-decoration: none;
-  ${props => props.$active
-    && `
+  ${(props) =>
+    props.$active &&
+    `
     background: rgba(0, 0, 0, 0.1);
   `}
   ${MEDIA_QUERY_MOBILE_M} {
@@ -114,11 +121,11 @@ const Nav = styled(Link)`
   }
 `;
 const WelcomeMessage = styled.div`
-  background-color: coral;
+  background-color: cadetblue;
   text-align: center;
-  font-size: 20px;
-  color: white;
-  padding: 6px;
+  font-size: 18px;
+  color: white;;
+  padding: 3px;
 `;
 
 export default function Header() {
@@ -132,10 +139,11 @@ export default function Header() {
 
   //  當路徑改變時先將錯誤訊息清空
   useEffect(
-    () => history.listen(() => {
-      dispatch(setErrorMessage(null));
-    }),
-    [dispatch, history],
+    () =>
+      history.listen(() => {
+        dispatch(setErrorMessage(null));
+      }),
+    [dispatch, history]
   );
 
   const handleLogout = () => {
@@ -153,10 +161,7 @@ export default function Header() {
               <Nav $active={pathname === '/'} to="/">
                 首頁
               </Nav>
-              <Nav
-                $active={pathname === '/About'}
-                to="/About"
-              >
+              <Nav $active={pathname === '/About'} to="/About">
                 關於我
               </Nav>
               <Nav
@@ -168,29 +173,22 @@ export default function Header() {
             </NavbarList>
             <NavbarList>
               {/* 初始化時因為 userData 初始值為 null，需等待確認完身分後再顯示 */}
-              {isGettingUserData && <GettingUserDataLoader />}
+              {isGettingUserData && (
+                <Spinner animation="border" variant="primary" />
+              )}
               {!userData && isGettingUserData === false && (
                 <>
-                  <Nav
-                    $active={pathname === '/register'}
-                    to="/register"
-                  >
+                  <Nav $active={pathname === '/register'} to="/register">
                     註冊
                   </Nav>
-                  <Nav
-                    $active={pathname === '/login'}
-                    to="/login"
-                  >
+                  <Nav $active={pathname === '/login'} to="/login">
                     登入
                   </Nav>
                 </>
               )}
               {userData && isGettingUserData === false && (
                 <>
-                  <Nav
-                    $active={pathname === '/new-post'}
-                    to="/new-post"
-                  >
+                  <Nav $active={pathname === '/new-post'} to="/new-post">
                     發布文章
                   </Nav>
                   <Nav onClick={handleLogout} to="/">
@@ -204,7 +202,8 @@ export default function Header() {
 
         {userData && (
           <WelcomeMessage>
-            Hello!
+            Hello! 
+            {' '}
             {userData.nickname}
           </WelcomeMessage>
         )}

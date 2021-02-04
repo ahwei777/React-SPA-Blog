@@ -12,7 +12,7 @@ const PaginationWrapper = ({ postsCount, currentPage }) => {
       <Pagination.Item
         key={number}
         active={number === Number(currentPage)}
-        href={`#/BlogAppRedux/pagination/${number}`}
+        href={`#/pagination/${number}`}
       >
         {number}
       </Pagination.Item>,

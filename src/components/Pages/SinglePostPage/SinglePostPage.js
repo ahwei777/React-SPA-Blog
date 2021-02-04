@@ -1,14 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable import/no-unresolved */
-import React, {
-  useEffect, useState, memo, useCallback,
-} from 'react';
+import React, { useEffect, useState, memo, useCallback } from 'react';
 import styled from 'styled-components';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Spinner } from 'react-bootstrap';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Spinner as DeletingLoader } from 'react-awesome-spinners';
-import Wrapper from '../../templates/Wrapper';
 import usePrevious from '../../../hooks/usePrevious';
 import {
   getPost,
@@ -18,9 +14,17 @@ import {
   selectIsDeletingPost,
   selectSinglePostData,
 } from '../../../redux/reducers/postReducer';
-import { selectUserData } from '../../../redux/reducers/userReducer'
+import { selectUserData } from '../../../redux/reducers/userReducer';
 import PostLoadingBackground from '../../Loaders/LoopCircleLoading';
 
+const Wrapper = styled.div`
+  width: 80%;
+  background: white;
+  opacity: 0.8;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+`;
 const PostContainer = styled.div`
   padding: 16px;
 `;
@@ -59,8 +63,8 @@ function DeleteModal({
           <Modal.Title>提示</Modal.Title>
         </Modal.Header>
         {isDeletingPost && (
-          <div className="d-flex justify-content-center">
-            <DeletingLoader />
+          <div className="d-flex justify-content-center py-5">
+            <Spinner animation="border" variant="danger" />
           </div>
         )}
         {!isDeletingPost && (
@@ -81,9 +85,7 @@ function DeleteModal({
   );
 }
 
-const Post = memo(({
-  singlePostData, handleShowDeleteModal, userData, id,
-}) => {
+const Post = memo(({ singlePostData, handleShowDeleteModal, userData, id }) => {
   return (
     <PostContainer>
       <PostTitle>{singlePostData[0].title}</PostTitle>
@@ -93,11 +95,7 @@ const Post = memo(({
       {/* 權限驗證：登入者的 ID 為此篇文章作者的 ID 時才可編輯及刪除 */}
       {userData && userData.id === singlePostData[0].userId && (
         <ButtonWrapper>
-          <Button
-            className="mr-3"
-            variant="info"
-            href={`#/BlogAppRedux/update-post/${id}`}
-          >
+          <Button className="mr-3" variant="info" href={`#/update-post/${id}`}>
             編輯
           </Button>
           <Button variant="danger" onClick={handleShowDeleteModal}>
@@ -148,7 +146,7 @@ export default function SinglePost() {
       //  1. 發送 request 前，isDeletingPost: false, prevIsDeletingPost: false
       //  2. 開始發送 request, isDeletingPost: true, prevIsDeletingPost: false
       //  3. 收到 response, isDeletingPost: false, prevIsDeletingPost: true
-      history.push('/BlogAppRedux/');
+      history.push('/');
     }
   }, [history, isDeletingPost, prevIsDeletingPost]);
 

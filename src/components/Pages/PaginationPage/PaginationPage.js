@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Wrapper from '../../templates/Wrapper';
 import Post from '../../templates/Post';
 import PaginationWrapper from '../../templates/PaginationWrapper';
+import styled from 'styled-components';
 import {
   getPost,
   setByPagePostData,
@@ -14,6 +15,11 @@ import {
   selectTotalPostCount,
 } from '../../../redux/reducers/postReducer';
 import PostLoadingBackground from '../../Loaders/LoopCircleLoading';
+import SideBar from '../../SideBar';
+
+const Layout = styled.div`
+  display: flex;
+`;
 
 function PaginationPage() {
   const { page } = useParams();
@@ -34,16 +40,25 @@ function PaginationPage() {
   return (
     <>
       {isGettingPost && <PostLoadingBackground />}
-      {!isGettingPost && byPagePostData && byPagePostData.length > 0 && (
+
+      <Layout>
+        <SideBar />
         <Wrapper>
-          {/* post */}
-          {byPagePostData.map((post) => (
-            <Post key={post.id} post={post} />
-          ))}
-          {/* 分頁按鈕列 */}
-          <PaginationWrapper postsCount={totalPostsCount} currentPage={page} />
+          {byPagePostData && byPagePostData.length > 0 && (
+            <>
+              {/* post */}
+              {byPagePostData.map((post) => (
+                <Post key={post.id} post={post} />
+              ))}
+              {/* 分頁按鈕列 */}
+              <PaginationWrapper
+                postsCount={totalPostsCount}
+                currentPage={page}
+              />
+            </>
+          )}
         </Wrapper>
-      )}
+      </Layout>
     </>
   );
 }

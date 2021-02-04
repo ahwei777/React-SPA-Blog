@@ -2,10 +2,21 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPost, setAllPostData, selectIsGettingPost, selectAllPostData } from '../../../redux/reducers/postReducer';
+import styled from 'styled-components';
+import {
+  getPost,
+  setAllPostData,
+  selectIsGettingPost,
+  selectAllPostData,
+} from '../../../redux/reducers/postReducer';
+import SideBar from '../../SideBar';
 import Wrapper from '../../templates/Wrapper';
 import Post from '../../templates/Post';
 import PostLoadingBackground from '../../Loaders/LoopCircleLoading';
+
+const Layout = styled.div`
+  display: flex;
+`;
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -24,13 +35,18 @@ function HomePage() {
   return (
     <>
       {isGettingPost && <PostLoadingBackground />}
-      {!isGettingPost && allPostData && allPostData.length > 0 && (
+      <Layout>
+        <SideBar />
         <Wrapper>
-          {allPostData.map(post => (
-            <Post key={post.id} post={post} />
-          ))}
+          {allPostData && allPostData.length > 0 && (
+            <>
+              {allPostData.map((post) => (
+                <Post key={post.id} post={post} />
+              ))}
+            </>
+          )}
         </Wrapper>
-      )}
+      </Layout>
     </>
   );
 }

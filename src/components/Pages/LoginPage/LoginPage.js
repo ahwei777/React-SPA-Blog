@@ -12,12 +12,11 @@ import { setErrorMessage } from '../../../redux/reducers/errorMessageReducer';
 
 const Wrapper = styled.div`
   text-align: center;
-  margin: 100px auto;
+  margin: 50px auto;
   background: white;
   opacity: 0.8;
-  max-width: 500px;
   border-radius: 10px;
-  padding: 50px 20px;
+  padding: 50px;
 `;
 
 export default function LoginPage() {
@@ -87,7 +86,7 @@ export default function LoginPage() {
           </div>
         )}
         {!isLogging && (
-          <Button variant="primary" size="lg" className="" type="submit">
+          <Button variant="primary" size="lg" className="mt-4" type="submit">
             登入
           </Button>
         )}
