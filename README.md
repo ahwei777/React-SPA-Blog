@@ -15,7 +15,7 @@
 - [專案安裝流程](#專案安裝流程)
 - [聲明](#聲明)
 - [版本紀錄](#版本紀錄)
-- [資料引用來源](#資料引用來源)
+- [資料來源](#資料來源)
 
 ## 簡介
 
@@ -93,16 +93,6 @@
 └── README.md
 ```
 
-### Breakpoints
-
-| Breakpoint        | Class infix | Dimensions |
-| ----------------- | ----------- | ---------- |
-| X-Small           | xs          | <576px     |
-| Small             | sm          | ≥576px     |
-| Medium            | md          | ≥768px     |
-| Large             | lg          | ≥992px     |
-| Extra large       | xl          | ≥1200px    |
-
 ## 專案安裝流程
 
 1. clone 此專案至本機
@@ -130,7 +120,7 @@ $ npm run start
 - 1.0 - 2021.02.04
 	- 完成基本功能
 
-## 資料引用來源
+## 資料來源
 
 - [Unsplash](https://unsplash.com/)
 - [Favicon.io](https://favicon.io/)
