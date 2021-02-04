@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# Redux Blog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 網站連結：https://blog.ahwei777.tw  
+```
+註冊後密碼將自動更改為「Lidemy」
+```
+![](https://github.com/ahwei777/for-GaGiO-README/blob/main/blog/blog-wholepage.png?raw=true)
 
-## Available Scripts
+## 索引
+- [簡介](#簡介)
+- [功能介紹](#功能介紹)
+- [使用技術](#使用技術)
+- [Demo](#Demo)
+- [專案架構](#專案架構)
+- [專案安裝流程](#專案安裝流程)
+- [聲明](#聲明)
+- [版本紀錄](#版本紀錄)
+- [資料引用來源](#資料引用來源)
 
-In the project directory, you can run:
+## 簡介
 
-### `npm start`
+此作品為 [Lidemy mentor-program-4th](https://github.com/Lidemy/mentor-program-4th) 的課程作業之一 ，主要為利用 React.js 及相關套件開發 SPA 網頁，並串接實際後端 API （[Lidemy 學生專用 API Server](https://github.com/Lidemy/lidemy-student-json-api-server)）。
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 功能介紹
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 訪客
+- 註冊會員
+- 瀏覽文章（列表/分頁/單篇）
 
-### `npm test`
+### 會員
+- 登入（JWT 驗證）
+- 發布文章
+- 編輯自己發布的文章
+- 刪除自己發布的文章
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 使用技術
+- 前端框架
+    - React Hooks
+- UI 框架
+    - [React Bootstrap](https://react-bootstrap.github.io/)
+- 其他套件
+    - React Router - 切換路由實現 SPA
+    - Redux Toolkit - 管理元件共用狀態，處理非同步邏輯
+    - styled-components - 主題配置/動態變更樣式
+- RWD - 網頁排版自適應主要瀏覽器
 
-### `npm run build`
+## DEMO
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 瀏覽所有文章/單篇文章
+以 Layout 切割頁面為固定區域（header, sidebar）及可滑動瀏覽區域
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![](https://github.com/ahwei777/for-GaGiO-README/blob/main/blog/index.gif?raw=true)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 分頁功能
+配合後端 API 所提供參數 `_page ` 及 `_limit` 實現分頁功能。
 
-### `npm run eject`
+![](https://github.com/ahwei777/for-GaGiO-README/blob/main/blog/pagination.gif?raw=true)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 發布文章
+註冊/登入後才會顯示發布文章按鈕，輸入文章標題及內容即可發布。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![](https://github.com/ahwei777/for-GaGiO-README/blob/main/blog/addPost.gif?raw=true)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 編輯文章
+權限管理，只可編輯自己發布的文章。
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![](https://github.com/ahwei777/for-GaGiO-README/blob/main/blog/updatePost.gif?raw=true)
 
-## Learn More
+### 刪除文章
+權限管理，只可刪除自己發布的文章。
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![](https://github.com/ahwei777/for-GaGiO-README/blob/main/blog/deletePost.gif?raw=true)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 專案架構
 
-### Code Splitting
+```
+├── src/
+│  ├── components/              # 放置跨頁面共用元件
+│  ├── constants/               # 放置常態設定如 breakpoints
+│  ├── hooks/                   # 放置引入或額外定義的 hooks
+│  ├── img/                     # 放置各頁面所使用圖片
+│  ├── pages/                   # 放置具完整功能頁面
+│  ├── redux/                   # 放置 Redux store & reducers
+│  ├── routes/                  # 放置主要路由
+│  ├── App.css                  # 設定通用樣式及修正 UI
+│  ├── App.js                   # 設定主要 layout
+│  ├── index.js                 # 程式主要入口點
+│  ├── setupTests.js            # 測試相關設定
+│  ├── WebApi.js                # 串接後端 API
+│  └── utils.js                 # 放置跨元件使用函式
+├── package-lock.json
+├── package.json                # module 及 script 設定
+└── README.md
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Breakpoints
 
-### Analyzing the Bundle Size
+| Breakpoint        | Class infix | Dimensions |
+| ----------------- | ----------- | ---------- |
+| X-Small           | xs          | <576px     |
+| Small             | sm          | ≥576px     |
+| Medium            | md          | ≥768px     |
+| Large             | lg          | ≥992px     |
+| Extra large       | xl          | ≥1200px    |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 專案安裝流程
 
-### Making a Progressive Web App
+1. clone 此專案至本機
+``` 
+$ git clone https://github.com/ahwei777/
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. 安裝相依套件
+```
+$ npm install
+```
 
-### Advanced Configuration
+3. 在本機運行專案（預設 port:3000）
+```
+$ npm run start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 聲明
+本專案僅作為個人練習用途，註冊時請勿使用任何真實資料。另本作品所包含之圖片與內容不作任何商業用途使用。
 
-### Deployment
+[MIT](https://choosealicense.com/licenses/mit/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 版本紀錄
 
-### `npm run build` fails to minify
+- 1.0 - 2021.02.04
+	- 完成基本功能
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 資料引用來源
+
+- [Unsplash](https://unsplash.com/)
+- [Favicon.io](https://favicon.io/)
+- [Lidemy 程式導師計畫](https://bootcamp.lidemy.com/)

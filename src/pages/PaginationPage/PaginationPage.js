@@ -3,9 +3,9 @@
 import React, { useEffect, memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Wrapper from '../../templates/Wrapper';
-import Post from '../../templates/Post';
-import PaginationWrapper from '../../templates/PaginationWrapper';
+import Wrapper from '../../components/templates/Wrapper';
+import Post from '../../components/templates/Post';
+import PaginationWrapper from '../../components/templates/PaginationWrapper';
 import styled from 'styled-components';
 import {
   getPost,
@@ -13,9 +13,9 @@ import {
   selectIsGettingPost,
   selectByPagePostData,
   selectTotalPostCount,
-} from '../../../redux/reducers/postReducer';
-import PostLoadingBackground from '../../Loaders/LoopCircleLoading';
-import SideBar from '../../SideBar';
+} from '../../redux/reducers/postReducer';
+import PostLoadingBackground from '../../components/Loaders/LoopCircleLoading';
+import SideBar from '../../components/SideBar';
 
 const Layout = styled.div`
   display: flex;
@@ -31,6 +31,8 @@ function PaginationPage() {
   // page 更新時拿新資料
   useEffect(() => {
     dispatch(getPost('byPage', page));
+    // 跳轉至葉面頂端，提升使用者體驗
+    window.scrollTo(0, 0);
     //  clean up 避免下次回來時因為仍有舊資料而短暫顯示
     return () => {
       dispatch(setByPagePostData(null));

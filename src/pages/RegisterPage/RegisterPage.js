@@ -3,12 +3,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import {
-  Form, Button, Col, Row,
+  Form, Button, Col, Row, Spinner
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Default as RegisteringLoader } from 'react-awesome-spinners';
-import { register, selectIsRegistering, selectUserData } from '../../../redux/reducers/userReducer';
-import { setErrorMessage } from '../../../redux/reducers/errorMessageReducer';
+import { register, selectIsRegistering, selectUserData } from '../../redux/reducers/userReducer';
+import { setErrorMessage } from '../../redux/reducers/errorMessageReducer';
 
 const Wrapper = styled.div`
   text-align: center;
@@ -99,7 +98,7 @@ export default function RegisterPage() {
         {/* 註冊 Loader */}
         {isRegistering && (
           <div className="d-flex justify-content-center">
-            <RegisteringLoader />
+            <Spinner animation="border" variant="primary" />
           </div>
         )}
         {/* 註冊按鈕在 call API 期間隱藏 */}

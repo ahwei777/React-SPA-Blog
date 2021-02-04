@@ -3,12 +3,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import {
-  Form, Button, Col, Row,
+  Form, Button, Col, Row, Spinner
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Default as LoggingLoader } from 'react-awesome-spinners';
-import { login, selectUserData, selectIsLogging } from '../../../redux/reducers/userReducer';
-import { setErrorMessage } from '../../../redux/reducers/errorMessageReducer';
+import { login, selectUserData, selectIsLogging } from '../../redux/reducers/userReducer';
+import { setErrorMessage } from '../../redux/reducers/errorMessageReducer';
 
 const Wrapper = styled.div`
   text-align: center;
@@ -82,7 +81,7 @@ export default function LoginPage() {
         </Form.Group>
         {isLogging && (
           <div className="d-flex justify-content-center">
-            <LoggingLoader />
+            <Spinner animation="border" variant="primary"/>
           </div>
         )}
         {!isLogging && (

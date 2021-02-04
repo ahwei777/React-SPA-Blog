@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Button, Modal, Spinner } from 'react-bootstrap';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import usePrevious from '../../../hooks/usePrevious';
+import usePrevious from '../../hooks/usePrevious';
 import {
   getPost,
   setSinglePostData,
@@ -13,9 +13,9 @@ import {
   selectIsGettingPost,
   selectIsDeletingPost,
   selectSinglePostData,
-} from '../../../redux/reducers/postReducer';
-import { selectUserData } from '../../../redux/reducers/userReducer';
-import PostLoadingBackground from '../../Loaders/LoopCircleLoading';
+} from '../../redux/reducers/postReducer';
+import { selectUserData } from '../../redux/reducers/userReducer';
+import PostLoadingBackground from '../../components/Loaders/LoopCircleLoading';
 
 const Wrapper = styled.div`
   width: 80%;
@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   border-radius: 10px;
   padding: 20px;
   margin: 20px auto;
+  min-height: 50vh;
 `;
 const PostContainer = styled.div`
   padding: 16px;
@@ -159,8 +160,8 @@ export default function SinglePost() {
         handleDeletePost={handleDeletePost}
         isDeletingPost={isDeletingPost}
       />
-      {!isGettingPost && singlePostData && singlePostData.length > 0 && (
-        <Wrapper>
+      <Wrapper>
+        {singlePostData && singlePostData.length > 0 && (
           <Post
             singlePostData={singlePostData}
             handleShowDeleteModal={handleShowDeleteModal}
@@ -168,8 +169,8 @@ export default function SinglePost() {
             userData={userData}
             id={id}
           />
-        </Wrapper>
-      )}
+        )}
+      </Wrapper>
     </>
   );
 }

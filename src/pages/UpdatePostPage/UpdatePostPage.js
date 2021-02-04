@@ -1,10 +1,9 @@
 /* eslint-disable import/no-unresolved */
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Spinner as UpdatingLoader } from 'react-awesome-spinners';
 import {
   getPost,
   setSinglePostData,
@@ -14,11 +13,11 @@ import {
   selectSinglePostData,
   selectUpdatePostResponse,
   selectIsUpdatingPost,
-} from '../../../redux/reducers/postReducer';
-import { userData, selectUserData } from '../../../redux/reducers/userReducer';
-import usePrevious from '../../../hooks/usePrevious';
-import PostLoadingBackground from '../../Loaders/LoopCircleLoading';
-import { setErrorMessage } from '../../../redux/reducers/errorMessageReducer';
+} from '../../redux/reducers/postReducer';
+import { selectUserData } from '../../redux/reducers/userReducer';
+import usePrevious from '../../hooks/usePrevious';
+import PostLoadingBackground from '../../components/Loaders/LoopCircleLoading';
+import { setErrorMessage } from '../../redux/reducers/errorMessageReducer';
 
 const Wrapper = styled.div`
   background: white;
@@ -165,7 +164,7 @@ export default function AddPost() {
                 />
               </div>
               <div className="d-flex justify-content-center">
-                {isUpdatingPost && <UpdatingLoader />}
+                {isUpdatingPost && <Spinner animation="border" variant="primary"/>}
                 {!isUpdatingPost && (
                   <Button
                     variant="primary"

@@ -8,11 +8,11 @@ import {
   setAllPostData,
   selectIsGettingPost,
   selectAllPostData,
-} from '../../../redux/reducers/postReducer';
-import SideBar from '../../SideBar';
-import Wrapper from '../../templates/Wrapper';
-import Post from '../../templates/Post';
-import PostLoadingBackground from '../../Loaders/LoopCircleLoading';
+} from '../../redux/reducers/postReducer';
+import SideBar from '../../components/SideBar';
+import Wrapper from '../../components/templates/Wrapper';
+import Post from '../../components/templates/Post';
+import PostLoadingBackground from '../../components/Loaders/LoopCircleLoading';
 
 const Layout = styled.div`
   display: flex;

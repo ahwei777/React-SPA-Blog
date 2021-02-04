@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,9 +8,9 @@ import {
   addPost,
   selectAddPostResponse,
   selectIsAddingPost,
-} from '../../../redux/reducers/postReducer';
-import { setErrorMessage } from '../../../redux/reducers/errorMessageReducer';
-import usePrevious from '../../../hooks/usePrevious';
+} from '../../redux/reducers/postReducer';
+import { setErrorMessage } from '../../redux/reducers/errorMessageReducer';
+import usePrevious from '../../hooks/usePrevious';
 
 const Wrapper = styled.div`
   background: white;
@@ -106,9 +106,12 @@ export default function AddPost() {
           />
         </div>
         <div className="d-flex justify-content-center">
-          <Button variant="primary" size="lg" className="" type="submit">
-            送出
-          </Button>
+          {isAddingPost && <Spinner animation="border" variant="primary" />}
+          {!isAddingPost && (
+            <Button variant="primary" size="lg" className="" type="submit">
+              送出
+            </Button>
+          )}
         </div>
         {addPostResponse && addPostResponse.ok === 0 && (
           <AddPostErrorMessage>{addPostResponse.message}</AddPostErrorMessage>
