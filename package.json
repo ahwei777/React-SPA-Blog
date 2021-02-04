@@ -22,7 +22,7 @@
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },
-  "homepage": "https://ahwei7777.github.io/redux-blog",
+  "homepage": "https://blog.ahwei7777.tw",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
