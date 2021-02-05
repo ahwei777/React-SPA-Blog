@@ -30,39 +30,39 @@ const NavBarContainer = styled.div`
   background: floralwhite;
   display: flex;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 10px 20px;
+  padding: 5px;
   ${MEDIA_QUERY_MOBILE_M} {
     flex-direction: column;
   }
   ${MEDIA_QUERY_MOBILE_L} {
     flex-direction: row;
-    padding: 10px;
   }
 `;
 const Brand = styled.div`
   font-weight: bold;
-  margin: 10px auto;
+  margin: auto 5px;
   ${MEDIA_QUERY_MOBILE_M} {
-    font-size: 50px;
+    font-size: 20px;
   }
   ${MEDIA_QUERY_MOBILE_L} {
-    width: 150px;
-    font-size: 24px;
-    margin: auto 10px;
+    width: 200px;
   }
   ${MEDIA_QUERY_TABLET} {
     width: 350px;
-    font-size: 40px;
+    font-size: 30px;
   }
 `;
 const NavbarListContainer = styled.div`
+  font-weight: bold;
   ${MEDIA_QUERY_MOBILE_M} {
     width: 100%;
+    font-size: 14px;
     & + & {
       margin-top: 6px;
     }
   }
   ${MEDIA_QUERY_MOBILE_L} {
+    font-size: 18px;
     margin: auto 10px;
     width: 100%;
     display: flex;
@@ -72,7 +72,6 @@ const NavbarListContainer = styled.div`
 const NavbarList = styled.div`
   display: flex;
   ${MEDIA_QUERY_MOBILE_M} {
-    font-size: 24px;
     flex-direction: column;
     align-items: center;
     & + & {
@@ -80,7 +79,6 @@ const NavbarList = styled.div`
     }
   }
   ${MEDIA_QUERY_MOBILE_L} {
-    font-size: 18px;
     flex-direction: row;
     & + & {
       margin-top: 0px;
@@ -93,10 +91,13 @@ const Nav = styled(Link)`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
   color: black;
   text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+  }
   ${(props) =>
     props.$active &&
     `
@@ -116,15 +117,12 @@ const Nav = styled(Link)`
       margin-left: 6px;
     }
   }
-  ${MEDIA_QUERY_TABLET} {
-    font-size: 24px;
-  }
 `;
 const WelcomeMessage = styled.div`
   background-color: cadetblue;
   text-align: center;
   font-size: 18px;
-  color: white;;
+  color: white;
   padding: 3px;
 `;
 
@@ -201,11 +199,7 @@ export default function Header() {
         </NavBarContainer>
 
         {userData && (
-          <WelcomeMessage>
-            Hello! 
-            {' '}
-            {userData.nickname}
-          </WelcomeMessage>
+          <WelcomeMessage>Hello! {userData.nickname}</WelcomeMessage>
         )}
         {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       </HeaderContainer>

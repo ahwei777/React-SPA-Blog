@@ -16,7 +16,7 @@ const SideBarWrapper = styled.div`
   ${MEDIA_QUERY_TABLET} {
     display: block;
     width: 200px;
-    top: 135px;
+    top: 110px;
     position: fixed;
     background: white;
     opacity: 0.9;
@@ -35,7 +35,7 @@ const About = styled.div`
   color: grey;
 `;
 const Title = styled.div`
-margin-top: 20px;
+  margin-top: 20px;
   font-size: 24px;
 `;
 const Content = styled.div`
@@ -52,6 +52,9 @@ const IconWrapper = styled.div`
   & > a:hover {
     cursor: pointer;
     color: grey;
+  }
+  & > svg:not(:first-child) {
+    margin-left: 5px;
   }
 `;
 
