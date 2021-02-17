@@ -39,13 +39,6 @@ const PostBody = styled.textarea`
   width: 100%;
   resize: none;
 `;
-const AddPostErrorMessage = styled.div`
-  color: red;
-  font-weight: bold;
-  font-size: 36px;
-  text-align: center;
-  margin-top: 1rem;
-`;
 
 export default function AddPost() {
   const [titleValue, setTitleValue] = useState('');
@@ -72,7 +65,7 @@ export default function AddPost() {
     //  1. 發送 request 前，isAddingPost: false, prevIsAddingPost: false
     //  2. 開始發送 request, isAddingPost: true, prevIsAddingPost: false
     //  3. 收到 response, isAddingPost: false, prevIsAddingPost: true
-    if (!isAddingPost && prevIsAddingPost) {
+    if (!isAddingPost && prevIsAddingPost && addPostResponse.id) {
       history.push(`/BlogAppRedux/posts/${addPostResponse.id}`);
     }
   }, [dispatch, history, addPostResponse, isAddingPost, prevIsAddingPost]);
@@ -113,9 +106,6 @@ export default function AddPost() {
             </Button>
           )}
         </div>
-        {addPostResponse && addPostResponse.ok === 0 && (
-          <AddPostErrorMessage>{addPostResponse.message}</AddPostErrorMessage>
-        )}
       </PostForm>
     </Wrapper>
   );
