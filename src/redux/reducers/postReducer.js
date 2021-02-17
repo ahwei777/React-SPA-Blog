@@ -154,6 +154,7 @@ export const addPost = (data) => (dispatch) => {
   addPostAPI(data)
     .then((json) => {
       if (json.ok === 0) {
+        dispatch(setIsAddingPost(false));
         dispatch(setErrorMessage(json.message));
         return;
       }
@@ -203,7 +204,6 @@ export const selectByPagePostData = (store) => store.posts.byPagePostData;
 export const selectSinglePostData = (store) => store.posts.singlePostData;
 export const selectTotalPostCount = (store) => store.posts.totalPostsCount;
 export const selectIsUpdatingPost = (store) => store.posts.isUpdatingPost;
-export const selectUpdatePostResponse = (store) =>
-  store.posts.updatePostResponse;
+export const selectUpdatePostResponse = (store) => store.posts.updatePostResponse;
 
 export default postSlice.reducer;
